@@ -11,7 +11,7 @@ import { TodoItem } from './todoItem';
 export class AppComponent {
 
 
-  private list = new TodoList("Bob", [
+  private list = new TodoList("Rafael", [
     new TodoItem("Go for run", true),
     new TodoItem("Get flowers"),
     new TodoItem("Collect tickets"),
@@ -25,4 +25,18 @@ export class AppComponent {
     return this.list.items
         .filter(item => !item.complete).length;
   }
+
+  addItem(newItem: string) {
+    if (newItem != "") {
+        this.list.addItem(newItem);
+    }
+  }
+
+  get items(): readonly TodoItem[] {
+    return this.list.items.filter(item => this.showComplete || !item.complete);
+  }
+
+  showComplete: boolean = false;
+
 }
+
